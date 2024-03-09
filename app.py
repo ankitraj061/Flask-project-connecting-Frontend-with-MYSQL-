@@ -28,14 +28,15 @@ def register():
         address = request.form['address']
         department = request.form['department']
         course = request.form['course']
+        password = request.form['password']
 
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO students (name, email, age, father_name, mother_name, phone_no, DOB, blood_group, address, department, course) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                    (name, email, age, father_name, mother_name, phone_no, DOB, blood_group, address, department, course))
+        cur.execute("INSERT INTO students (name, email, age, father_name, mother_name, phone_no, DOB, blood_group, address, department, course, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    (name, email, age, father_name, mother_name, phone_no, DOB, blood_group, address, department, course, password))
         mysql.connection.commit()
         cur.close()
 
-        return redirect(url_for('registration_form'))
+        return render_template('success.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
